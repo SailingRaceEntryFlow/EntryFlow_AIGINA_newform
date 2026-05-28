@@ -454,6 +454,9 @@
 
     const EVENT_LOGO = "https://github.com/jsamartzis-png/logos/blob/main/logo_EntryFlow_removebg-preview.png?raw=true";
     const EVENT_BACKGROUND = "background.jpg";
+    const EVENT_TITLE = "ΑΙΓΙΝΑ 2026";
+    const FORM_OPEN = false;
+const CLOSED_MESSAGE = "Ο αγώνας έχει κλείσει και δεν δέχεται πλέον συμμετοχές.";
 
     const EVENT_NOTES = [
   "Με τη χρήση αυτής της εφαρμογής, μπορείτε εύκολα να υποβάλετε τα απαραίτητα έγγραφα και να ολοκληρώσετε την πληρωμή του παραβόλου (όλα σε ένα σημείο).",
@@ -661,6 +664,29 @@ function buildPrefillUrl(data) {
     }
 
     setupHero();
+    if (FORM_OPEN === false) {
+  document.querySelector(".hero").style.display = "none";
+  document.querySelector(".separator").style.display = "none";
+  document.getElementById("eventTitle").style.display = "none";
+  document.querySelector(".notice-box").style.display = "none";
+  document.querySelector(".search-area").style.display = "none";
+
+  const statusBox = document.getElementById("status");
+  statusBox.style.display = "block";
+  statusBox.innerHTML =
+    '<div style="color:#0d5e92; font-size:28px; font-weight:700; text-align:center; margin-bottom:24px;">' +
+    EVENT_TITLE +
+    '</div>' +
+    '<div style="color:#b00020; font-size:22px; text-align:center;">' +
+    CLOSED_MESSAGE +
+    '<br><br>Για πληροφορίες επικοινωνήστε με τη Γραμματεία Αγώνα.' +
+    '</div>';
+
+  statusBox.style.fontSize = "22px";
+  statusBox.style.marginTop = "60px";
+
+  throw new Error("FORM_CLOSED");
+}
 
     searchBtn.addEventListener("click", searchBoat);
     continueBtn.addEventListener("click", continueToForm);
